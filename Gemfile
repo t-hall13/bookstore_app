@@ -40,6 +40,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
   gem 'rb-fsevent' if 'uname' =~ /Darwin/
+  gem 'fabrication', '2.11.3'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -51,4 +52,10 @@ end
 
 group :test do
   gem 'capybara', '2.4.1'
+  gem 'faker'
+end
+
+group :development do
+  gem 'pry', '0.10.0'
+  gem 'pry-nav', '0.2.4'
 end
