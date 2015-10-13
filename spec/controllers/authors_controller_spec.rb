@@ -14,4 +14,22 @@ describe AuthorsController do
        end
     end
     
+    describe "Get #show" do
+        let(:author) { Fabricate(:author) }
+        it "Finds the author with the given id and assigns it to the @author variable" do
+       
+        
+        get :show, id: author
+        expect(assigns(:author)).to eq(author) 
+    end
+
+
+it "renders the show template" do
+       
+        
+        get :show, id:author
+        expect(response).to render_template :show
+
+     end
+    end
 end
