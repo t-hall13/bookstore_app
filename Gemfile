@@ -42,9 +42,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   
-  gem 'rspec-rails', '2.14.1'
+  gem 'rspec-rails', '3.2.3'
   gem 'spring-commands-rspec'
-  gem 'guard-rspec'
+  gem 'guard-rspec', require: false
   gem 'rb-fsevent' if 'uname' =~ /Darwin/
   gem 'fabrication', '2.11.3'
 
@@ -56,8 +56,9 @@ end
 
 
 group :test do
-  gem 'capybara', '2.4.1'
+  gem 'capybara', '2.4.4'
   gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development do

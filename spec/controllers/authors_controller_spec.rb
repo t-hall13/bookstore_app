@@ -1,5 +1,5 @@
-require 'spec_helper'
-describe AuthorsController do
+require 'rails_helper'
+RSpec.describe AuthorsController, :type => :controller do
     describe "GET #index" do
        it "assigns the authors object to the @authors variable" do
             author1 = Fabricate(:author)
