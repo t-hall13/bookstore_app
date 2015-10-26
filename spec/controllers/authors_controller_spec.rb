@@ -1,12 +1,10 @@
 require 'rails_helper'
 RSpec.describe AuthorsController, :type => :controller do
     describe "GET #index" do
-       it "assigns the authors object to the @authors variable" do
-            author1 = Fabricate(:author)
-            author2 = Fabricate(:author)
+       it "returns a successful http request status code" do
             
             get :index
-            expect(assigns(:authors)).to match_array([author1, author2])
+            expect(response).to have_http_status(:success)
         end    
        it "renders the index template" do
           get :index
@@ -15,25 +13,18 @@ RSpec.describe AuthorsController, :type => :controller do
     end
     
     describe "GET #show" do
-        let(:author) { Fabricate(:author) }
-        it "Finds the author with the given id and assigns it to the @author variable" do
-       
-        get :show, id: author
-        expect(assigns(:author)).to eq(author) 
-        end
-
-        it "renders the show template" do
-       
-        get :show, id:author
-        expect(response).to render_template :show
-
+       it "returns a successful http request status code" do
+           author = Fabricate(:author)
+           
+        get :show, id: author.id
+        expect(response).to have_http_status(:success) 
         end
     end
     
     describe "GET #new" do
-      it "assigns a new author object to the @author variable" do
+      it "returns a successful http request status code" do
          get :new
-         expect(assigns(:author)).to be_instance_of(Author)
+         expect(response).to have_http_status(:success)
       end
         
         it "renders the new template" do
@@ -47,33 +38,34 @@ RSpec.describe AuthorsController, :type => :controller do
            it "saves the new author object" do
                #require 'pry'; binding.pry
                post :create, author: Fabricate.attributes_for(:author)
+               
                expect(Author.count).to eq(1)
            end
            
-           it "should redirect to the show action" do
+           it "redirects to the author show action" do
               post :create, author: Fabricate.attributes_for(:author)
-              expect(response).to redirect_to author_path(Author.first)
+              
+              expect(response).to redirect_to author_path(Author.last)
            end
            
            it "sets the success flash message" do
               post :create, author: Fabricate.attributes_for(:author)
+              
               expect(flash[:success]).to eq("Author has been created.")
            end
        end
        
        context "an unsuccessful create" do
-           it "does not save the new author object with invalid inputs" do
+           it "does not save the author object with invalid inputs" do
              post :create, author: Fabricate.attributes_for(:author, first_name: nil)
+             
              expect(Author.count).to eq 0
            end
            
-           it "renders the new template" do
-             post :create, author: Fabricate.attributes_for(:author, first_name: nil)
-             expect(response).to render_template :new
-           end
            
            it "sets the failure flash message" do
               post :create, author: Fabricate.attributes_for(:author, first_name: nil)
+              
               expect(flash[:danger]).to eq("Author has not been created.")
            end
        end
@@ -82,54 +74,50 @@ RSpec.describe AuthorsController, :type => :controller do
     describe "GET #edit" do
         let(:author) { Fabricate(:author) }
         
-        it "finds the author with the given id and assigns to  @author variable" do
+        it "sends a successful edit request" do
             get :edit, id: author
-            expect(assigns(:author)).to eq author
-        end
-        
-        it "renders the edit template" do
-           get :edit, id: author
-           expect(response).to render_template :edit
+            
+           expect(response).to have_http_status(:success)
         end
     end
     
     describe "PUT #update" do
         context "a successful update" do
-            let(:author) { Fabricate(:author) }
+            let(:bob) { Fabricate(:author, first_name:"Bob") }
             
             it "updates the modified author object" do
-               put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: author.id
-               expect(Author.first.first_name).to eq 'Paul'
-            end
-            
-            it "redirects to the show action" do
-                 put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: author.id
-                expect(response).to redirect_to author_path(Author.first)
+               put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: bob.id
+               
+               expect(Author.last.first_name).to eq 'Paul'
+               expect(Author.last.first_name).not_to eq 'Bob'
             end
             
             it "sets the success flash message" do
-                put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: author.id
+                put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: bob.id
+                
                 expect(flash[:success]).to eq "Author has been updated."
+            end
+            
+            it "redirects to the show action" do
+                 put :update, author: Fabricate.attributes_for(:author, first_name: 'Paul'), id: bob.id
+                expect(response).to redirect_to author_path(Author.last)
             end
         end
         
         context "an unsuccessful update" do
-           let(:author) { Fabricate(:author, first_name: 'Paul') }
+           let(:bob) { Fabricate(:author, first_name:"Bob") }
             
-            it "updates the modified author object" do
-               put :update, author: Fabricate.attributes_for(:author, first_name: ''), id: author.id
-               expect(Author.first.first_name).to eq 'Paul'
+            it "does not update the author object with invalid inputs" do
+               put :update, author: Fabricate.attributes_for(:author, first_name: nil), id: bob.id
+               
+               expect(Author.last.first_name).to eq 'Bob'
             end
             
-            it "renders the edit template" do
-                 put :update, author: Fabricate.attributes_for(:author, first_name: ''), id: author.id
-                expect(response).to render_template :edit
-            end
-            
-            it "sets the danger flash message" do
-                put :update, author: Fabricate.attributes_for(:author, first_name: ''), id: author.id
+            it "sets the failure flash message" do
+                put :update, author: Fabricate.attributes_for(:author, first_name: nil), id: bob.id
+                
                 expect(flash[:danger]).to eq "Author has not been updated."
-            end 
+            end
         end
     end
     
@@ -138,15 +126,17 @@ RSpec.describe AuthorsController, :type => :controller do
        
        it "deletes the author with the given id" do
           delete :destroy, id: author
+          
           expect(Author.count).to eq(0)
         end
         
         it "sets the flash message" do
            delete :destroy, id: author
+           
            expect(flash[:success]).to eq("Author has been deleted.")
         end
         
-        it "redirects to the index page" do
+        it "redirects to the index action" do
            delete :destroy, id: author
            expect(response).to redirect_to authors_path
         end
