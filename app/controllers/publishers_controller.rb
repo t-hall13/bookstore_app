@@ -1,10 +1,10 @@
 class PublishersController < ApplicationController
+    before_action :set_publisher, except: [:index, :new, :create]
     def index
-    
+    @publisher= Publisher.all
     end
     
     def show
-        @publisher = Publisher.find(params[:id])
     end
     
     def new
@@ -22,8 +22,30 @@ class PublishersController < ApplicationController
         end
     end
     
+    def edit
+    end
+    
+    def update
+       if @publisher.update(publisher_params)
+           flash[:success] = "Publisher has been updated."
+           redirect_to @publisher
+       else
+           flash[:danger] = "Publisher has not been updated."
+           render :edit
+       end
+    end
+    
+    def destroy
+      @publisher.destroy
+      flash[:success] = "Publisher has been deleted."
+      redirect_to publishers_path
+    end
     private
     def publisher_params
         params.require(:publisher).permit(:name)
+    end
+    
+    def set_publisher
+      @publisher = Publisher.find(params[:id])   
     end
 end

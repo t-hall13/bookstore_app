@@ -66,4 +66,67 @@ RSpec.describe PublishersController, :type => :controller do
           end
        end
     end
+    
+    describe "GET #edit" do
+       let(:publisher) { Fabricate(:publisher) }
+       
+       it "sends a successful edit request" do
+          get :edit, id: publisher
+          
+          expect(response).to have_http_status(:success)
+       end
+    end
+    
+    describe "PUT #update" do
+       context "a successful update" do
+          let(:aries) { Fabricate(:publisher, name: "Aries") }
+          
+          it "updates the modified publisher object" do
+             put :update, publisher: Fabricate.attributes_for(:publisher, name:'Leo'), id: aries.id 
+                expect(flash[:success]).to eq("Publisher has been updated.")
+          end
+          
+          it "redirects to the show action" do
+             put :update, publisher: Fabricate.attributes_for(:publisher, name:'Leo'), id: aries.id 
+             expect(response).to redirect_to publisher_path(Publisher.last)
+          end
+       end
+       
+       context "an unsuccessful update" do
+           let(:aries) { Fabricate(:publisher, name: "Aries") }
+           
+           it "does not update the publisher object with invalid inputs" do
+               put :update, publisher: Fabricate.attributes_for(:publisher, name:nil), id: aries.id
+               
+               expect(Publisher.last.name).to eq 'Aries'
+           end
+           
+           it "set the failure flash message" do
+              put :update, publisher: Fabricate.attributes_for(:publisher, name:nil), id: aries.id
+              
+              expect(flash[:danger]).to eq "Publisher has not been updated."
+           end
+       end
+    end
+    
+    describe "DELETE #destroy" do
+       let(:publisher) { Fabricate(:publisher) }
+       
+       it "deletes the publisher with the given id" do
+          delete :destroy, id: publisher
+          
+          expect(Publisher.count).to eq(0)
+       end
+       
+       it "sets the flash message" do
+          delete :destroy, id: publisher
+          
+          expect(flash[:success]).to eq "Publisher has been deleted."
+       end
+       
+       it "redirects to the index action" do
+          delete :destroy, id: publisher
+          expect(response).to redirect_to publishers_path
+       end
+    end
 end
