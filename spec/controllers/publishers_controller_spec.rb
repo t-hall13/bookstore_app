@@ -59,8 +59,10 @@ RSpec.describe PublishersController, :type => :controller do
              expect(Publisher.count).to eq(0)
           end
           
+         
+          
           it "sets the failure flash message" do
-            post :create, publisher: Fabricate.attributes_for(:publisher, name: nil)
+            post :create, publisher: Fabricate.attributes_for(:publisher, name:nil)
             
             expect(flash[:danger]).to eq("Publisher has not been created.")
           end
