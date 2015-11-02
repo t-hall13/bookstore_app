@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
+   before_action :set_book, except: [:index, :new, :create]
    def index
    end
    
    def show
-      @book = Book.find(params[:id]) 
+     
    end
   
    def new
@@ -22,7 +23,6 @@ class BooksController < ApplicationController
    end
    
    def edit
-      @book = Book.find(params[:id])
      
    end
    
@@ -45,5 +45,9 @@ class BooksController < ApplicationController
    private
    def book_params
       params.require(:book).permit(:title, :isbn, :price, :page_count, :description, :published_at, :publisher_id) 
+   end
+   
+   def set_book
+       @book = Book.find(params[:id]) 
    end
 end
