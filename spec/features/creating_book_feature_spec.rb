@@ -7,11 +7,11 @@ RSpec.feature "creating Books" do
   scenario "with valid inputs succeeds" do
     visit root_path
     
-    click_link "Books", exact: trueg
+    click_link "Books", exact: true
     click_link "Add New Book"
     
     fill_in "Title", with: "Javascript"
-    fill_in "isbn", with: "9780321772978"
+    fill_in "Isbn", with: "9780321772978"
     fill_in "Page count", with: 518
     fill_in "Price", with: 34.99
     fill_in "Description", with: "Learn Javascript the quick and easy way."
