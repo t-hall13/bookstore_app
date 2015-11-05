@@ -2,7 +2,7 @@
   <div class="form-group">
     <label class= "control-label col-md-3">Title</label>
     <div class="col-md-9">
-      <%=f.text_field :title, class: 'form-control', hide_label: true, placeholder: 'Title of the book', autofocus: true %>
+      <%=f.text_field :title, class: 'form-control', hide_label: true, placeholder: 'Book tit', autofocus: true %>
     </div>
   </div>
   
@@ -37,7 +37,7 @@
   <div class="form-group">
     <label class= "control-label col-md-3">Publication date</label>
     <div class="col-md-9">
-      <%= f.text_field :published_at, placeholder: 'Date format: yyyy-mm-dd', class: 'form-control', hide_label: true %>
+      <%= f.text_field :published_at, placeholder: 'Date format: mm-dd-yy', class: 'form-control', hide_label: true %>
     </div>
   </div>
   
