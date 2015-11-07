@@ -1,2 +1,6 @@
 @book.publications
 @book.authors
+
+
+load Rails.root + "db/seeds.rb"
+
