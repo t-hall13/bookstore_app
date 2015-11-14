@@ -2,7 +2,7 @@ require 'rails_helper'
  feature "Signing in Users" do
    let!(:user) { Fabricate(:user, email: 'john@example.com') }
     
-    scenario 'successful signin' do
+    scenario 'successfully' do
       visit root_path
       
       click_link 'Sign in'
@@ -14,7 +14,7 @@ require 'rails_helper'
       expect(page).to have_content('Sign in successful.')
     end
     
-    scenario 'unsuccessful signin' do
+    scenario 'unsuccessfully' do
       visit root_path
       
       click_link 'Sign in'
