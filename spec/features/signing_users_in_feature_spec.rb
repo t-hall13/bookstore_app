@@ -13,7 +13,7 @@ RSpec.feature 'Signing In Users' do
     fill_in "Password", with: user.password
     click_button 'Sign in'
     
-    expect(page).to have_content('Sign in successful.')
+    expect(page).to have_content('Sign in successful')
   end
   
   scenario 'unsuccessfully' do
