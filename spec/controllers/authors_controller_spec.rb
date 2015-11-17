@@ -1,7 +1,28 @@
 require 'rails_helper'
+require 'support/macros'
 RSpec.describe AuthorsController, :type => :controller do
+  let!(:admin) { Fabricate(:admin) }
+  let!(:user) { Fabricate(:user) }
+  
+  before { set_current_admin admin }
+  
+  
   describe "GET #index" do
-       it "returns a successful http request status code" do
+    context "guest users" do
+      before { clear_current_user }
+      
+      it "redirects to the signin page for unauthenticated users" do
+        get :index
+        expect(response).to redirect_to signin_path
+      end
+    end
+    
+    context "non-admin users" do
+      
+    end
+    
+    context "admin users" do
+      it "returns a successful http request status code" do
             
             get :index
             expect(response).to have_http_status(:success)
@@ -10,6 +31,9 @@ RSpec.describe AuthorsController, :type => :controller do
           get :index
           expect(response).to render_template :index
        end
+    end
+    
+       
   end
     
   describe "GET #show" do
@@ -142,3 +166,4 @@ RSpec.describe AuthorsController, :type => :controller do
         end
     end
 end
+
