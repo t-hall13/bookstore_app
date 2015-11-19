@@ -1,5 +1,8 @@
 require 'rails_helper'
 RSpec.feature "Creating Authors" do
+    let(:admin) { Fabricate(:admin) }
+    
+    before { sign_in_as admin }
     scenario "with valid inputs succeeds" do
         visit root_path
         
