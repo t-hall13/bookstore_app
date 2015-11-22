@@ -1,14 +1,17 @@
 require 'rails_helper'
 RSpec.feature 'Listing Authors' do
+  
+  let(:admin) { Fabricate(:admin) }
   let!(:john) { Fabricate(:author, first_name:'John', last_name: 'Doe') }
   let!(:mary) { Fabricate(:author, first_name:'Mary', last_name: 'Grant') }
   
+  before { sign_in_as admin }
   scenario "in the database" do
     visit root_path
     
     click_link "Authors"
     
-    within("div.page-header") do
+    within(".page-header") do
       expect(page).to have_content('All Authors')
     end
     
