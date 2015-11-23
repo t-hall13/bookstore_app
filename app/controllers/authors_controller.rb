@@ -15,7 +15,7 @@ class AuthorsController < ApplicationController
     end
     
     def create
-     # require 'pry'; binding.pry
+      #require 'pry'; binding.pry
       @author = Author.new(author_params)
       if @author.save
           flash[:success] = 'Author has been created.'

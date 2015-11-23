@@ -1,9 +1,11 @@
 require 'rails_helper'
+require 'support/macros'
+
 RSpec.feature 'Listing Authors' do
-  
-  let(:admin) { Fabricate(:admin) }
+
   let!(:john) { Fabricate(:author, first_name:'John', last_name: 'Doe') }
   let!(:mary) { Fabricate(:author, first_name:'Mary', last_name: 'Grant') }
+  let(:admin) { Fabricate(:admin) }
   
   before { sign_in_as admin }
   scenario "in the database" do

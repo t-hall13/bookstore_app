@@ -1,13 +1,14 @@
 require 'rails_helper'
 RSpec.feature "Creating Authors" do
-    let(:admin) { Fabricate(:admin) }
+   let(:admin) { Fabricate(:admin) }
     
     before { sign_in_as admin }
+    
     scenario "with valid inputs succeeds" do
         visit root_path
         
         click_link "Authors"
-        click_link "Add new author"
+        click_link "Add New Author"
         
         fill_in "First name", with: "John"
         fill_in "Last name", with: "Doe"
@@ -21,7 +22,7 @@ RSpec.feature "Creating Authors" do
         visit root_path
         
         click_link "Authors"
-        click_link "Add new author"
+        click_link "Add New Author"
         
         fill_in "First name", with: ""
         fill_in "Last name", with: ""
