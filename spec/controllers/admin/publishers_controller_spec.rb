@@ -1,5 +1,6 @@
 require 'rails_helper'
-RSpec.describe PublishersController, :type => :controller do
+
+RSpec.describe Admin::PublishersController, :type => :controller do
     describe "GET #index" do
        it "returns a successful http request status code" do
        
