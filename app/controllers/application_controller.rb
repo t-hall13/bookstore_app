@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   def require_signin
     unless current_user
     flash[:warning]= "Please sign in first!"
+    #require "pry";binding.pry
+    session[:intended_destination] = request.fullpath
     redirect_to signin_path
     end
   end
