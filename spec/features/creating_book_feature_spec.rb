@@ -1,8 +1,13 @@
 require 'rails_helper'
+require 'support/macros'
+
 RSpec.feature "creating Books" do
+  let(:admin) { Fabricate(:admin) }
   let!(:peachpit) { Fabricate(:publisher, name: "Peachpit Press") }
   let!(:author1) { Fabricate(:author) }
   let!(:author2) { Fabricate(:author) }
+  
+  before { sign_in_as admin }
   
   scenario "with valid inputs succeeds" do
     visit root_path
