@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'base/index'
     get '/add_publisher', to: 'publishers#new', as: 'add_publisher'
+   # get '/publisher_path', to: 'admin_publishers#show', as: 'publisher'
     resources :authors
     resources :publishers
     resources :books

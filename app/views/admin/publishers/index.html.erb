@@ -1,0 +1,20 @@
+<section>
+  <header>
+    <% if @publishers.empty? %>
+        <h3>No Publishers Defined</h3>
+    <% else %>
+        <h3>All Publishers</h3>
+    <% end %>
+  </header>
+    <%  @publishers.each do |publisher| %>
+      <div class="titles well col-md-12">
+            <%= link_to publisher.name, admin_publisher_path(publisher.id) %>
+      </div>
+    <% end %>
+    <br>
+    <%= link_to "Add New Publisher", new_admin_publisher_path, class: "btn btn-success btn-lg" %>
+ 
+</section>
+
+
+
