@@ -40,7 +40,7 @@ class Admin::PublishersController < Admin::BaseController
     def destroy
       @publisher.destroy
       flash[:success] = "Publisher has been deleted."
-      redirect_to publishers_path
+      redirect_to admin_publishers_path
     end
     private
     def publisher_params
