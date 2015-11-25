@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_signin, only: [:index]
+  before_action :require_admin, only: [:index]
   before_action :set_user, only: [:show]
   def index
     @users = User.all
