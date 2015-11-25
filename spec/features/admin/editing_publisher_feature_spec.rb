@@ -15,7 +15,7 @@ RSpec.feature "Editing Publishers" do
   #   deny_access_to_non_admins(user, 'Publishers')
   # end
   
-  scenario "successufully updates the Publisher with valid inputs" do
+  scenario "successfully updates the Publisher with valid inputs" do
     visit root_path
     click_link "Publishers"
     click_link publisher.name
@@ -27,7 +27,7 @@ RSpec.feature "Editing Publishers" do
     expect(page).to have_content('Publisher has been updated.')
   end
   
-   scenario "unsuccessufully updates the Publisher with invalid inputs" do
+   scenario "unsuccessfully updates the Publisher with invalid inputs" do
     visit root_path
     click_link "Publishers"
     click_link publisher.name

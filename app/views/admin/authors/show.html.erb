@@ -7,3 +7,14 @@
   </div>
   
 </section>
+<% content_for(:sidebar) do %>
+  Actions
+    <hr class='sidebar-hr'>
+    <ul class='sidebar-link'>
+      <li><%= link_to 'Edit', [:edit, :admin, @author],class: 'btn btn-default btnwidth' %></li><br>
+      <li><%= link_to 'Delete', [:admin, @author], method: :delete,
+      class: 'btn btn-default btnwidth',data:{ confirm: "Are you sure you want
+      to delete #{@author.full_name}?"} %></li>
+    </ul>
+    <hr class='sidebar-hr'>
+<% end %>
