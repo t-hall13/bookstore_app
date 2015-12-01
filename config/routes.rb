@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   
   resources :carts, only: [:show, :destroy]
+  resources :cart_items, only: [:create]
   resources :books, only: [:show]
   resources :users,only: [:index, :show, :new, :create]
   resource :session
