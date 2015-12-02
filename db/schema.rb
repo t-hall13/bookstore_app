@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201035232) do
+ActiveRecord::Schema.define(version: 20151202023930) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20151201035232) do
     t.integer  "cart_id"
     t.integer  "book_id"
     t.decimal  "price",      precision: 4, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
     t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "cart_items", ["book_id"], name: "index_cart_items_on_book_id"
