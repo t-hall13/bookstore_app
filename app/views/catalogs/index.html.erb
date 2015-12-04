@@ -6,6 +6,9 @@
       <h3 class='titles text-center'>All Books</h3>
     <% end %>
   </header>
+  <div id= "paginate">
+    <%= will_paginate @books, renderer: BootstrapPagination::Rails, class: 'pull-left, paginate' %>
+  </div>
   <% @books.each do |book| %>
     <p class='book-title'>
       <%= link_to book.title, catalog_path(book) %><br>
