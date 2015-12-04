@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
- it { should belong_to(:book) }
  it { should belong_to(:cart) }
+ it { should belong_to(:book) }
  
   describe "#line_total" do
     it "should return the line total cost" do

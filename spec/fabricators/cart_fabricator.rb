@@ -1,3 +1,2 @@
 Fabricator(:cart) do
-  
 end
