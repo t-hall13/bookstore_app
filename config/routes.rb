@@ -14,8 +14,7 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new', as: 'signin'
   post '/signin', to: 'sessions#create'
   
-  resources :carts, only: [:show, :destroy]
-  resources :cart_items, only: [:create]
+  
   resources :books, only: [:show]
   resources :users,only: [:index, :show, :new, :create]
   resource :session
@@ -25,4 +24,7 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :carts, only: [:show, :destroy]
+  resources :cart_items, only: [:create]
+  resources :orders, only: [:new]
 end
