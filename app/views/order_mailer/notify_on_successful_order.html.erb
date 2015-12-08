@@ -5,7 +5,7 @@
       
       <p>Thank you for the book order. Please find below the details of your order.</p>
       
-      <% @order.order_items each do |item| %>
+      <% @order.order_items.each do |item| %>
         <p><%= item.quantity %> &nbsp; &times; &nbsp; <%= item.book.title %> &nbsp; 
          <%= amount("#{item.line_total}") %></p>
       <% end %>

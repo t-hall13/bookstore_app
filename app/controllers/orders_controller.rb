@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:stripeToken]
-     # require 'pry';binding.pry
+      #require 'pry';binding.pry
       
       begin
         charge =Stripe::Charge.create(
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
           currency: "usd",
           source: token
           )
-          
+          #require 'pry';binding.pry
           @order.save
           @cart.destroy
           session[:cart_id] = nil
@@ -43,8 +43,7 @@ class OrdersController < ApplicationController
         @order.order_items << OrderItem.new(
           book_id: item.book_id,
           quantity: item.quantity,
-          price: item.price
-        )
+          price: item.price)
       end
     end
 end
