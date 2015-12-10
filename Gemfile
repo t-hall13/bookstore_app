@@ -39,6 +39,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
  gem 'bcrypt', '~> 3.1.7'
  gem 'will_paginate-bootstrap', '1.0.1'
  gem 'stripe', '~> 1.26.0', source: 'https://code.stripe.com'
+ 
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -67,6 +68,8 @@ group :test do
   gem 'capybara', '2.4.4'
   gem 'faker'
   gem 'shoulda-matchers','2.8.0', require: false
+  gem 'selenium-webdriver'
+  gem 'database_cleaner', '~>1.4'
 end
 
 group :development do

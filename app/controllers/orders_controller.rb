@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
       #require 'pry';binding.pry
       
       begin
-        charge =Stripe::Charge.create(
+         charge = Stripe::Charge.create(
           amount: total_sale,
           currency: "usd",
           source: token
