@@ -16,13 +16,14 @@ class OrdersController < ApplicationController
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:stripeToken]
       #require 'pry';binding.pry
-      
+      #puts "Token is #{token}"
       begin
-        charge =Stripe::Charge.create(
+          Stripe::Charge.create(
           amount: total_sale,
           currency: "usd",
-          source: token
+          source: token,
           )
+        
           #require 'pry';binding.pry
           @order.save
           @cart.destroy

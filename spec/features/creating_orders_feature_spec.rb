@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'support/macros'
+
 RSpec.feature "Creating orders" do
   let!(:book) { Fabricate(:book) }
   let!(:cart) { Fabricate(:cart) }
@@ -7,7 +9,7 @@ RSpec.feature "Creating orders" do
     sign_in_as user
   end
   
-  scenario 'creates a valid book' do
+  scenario 'creates a valid book', :js => true  do 
     visit root_path
     click_link 'Catalogs'
     click_link book.title
@@ -18,6 +20,7 @@ RSpec.feature "Creating orders" do
     fill_in 'Security Code', with: '123'
     select '10 - October', from: 'date_month'
     select '2016', from: 'date_year'
+    print page.html
     click_button 'Create Order'
     
     expect(page).to have_content('Order has been created.')
