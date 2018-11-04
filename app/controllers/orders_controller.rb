@@ -12,19 +12,20 @@ class OrdersController < ApplicationController
     
     if @order.valid?
       total_sale = @cart.total_sale_in_cents
-      
+      require 'stripe'
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:stripeToken]
-      #require 'pry';binding.pry
-      #puts "Token is #{token}"
+      # require 'pry';binding.pry
+      # puts "Token is #{token}"
       begin
-          Stripe::Charge.create(
+            Stripe::Charge.create({
           amount: total_sale,
           currency: "usd",
           source: token,
-          )
+          description: "Charge for test@example.com"
+          })
         
-          #require 'pry';binding.pry
+          # require 'pry';binding.pry
           @order.save
           @cart.destroy
           session[:cart_id] = nil
